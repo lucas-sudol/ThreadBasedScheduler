@@ -1,22 +1,22 @@
 # Project Title
 
-A1 - Operating Systems Spellchecker
+A1 - Pthreads Based Scehduler
 
 ## Description
-Uses threads to perform file spellchecking using a user defined dictionary
+Uses linux Pthreads to to perform thread based scheudling of computing Pi.
 
 ## Getting Started
 
 ### Dependencies
 
-OS Docker Containter
+Linux Docker Containter
 
 ### Executing program
 
 * How to build and run the program
 make
 
-./A1 <-l> to print summary on output file
+./A1 fileName flag
 
 * include the expected output
 
@@ -30,6 +30,8 @@ Summary (if chosen to display on terminal)
 
 Lucas Sudol
 lsudol@uoguelph.ca
+
+Sebastian Kula
 
 ## Development History
 

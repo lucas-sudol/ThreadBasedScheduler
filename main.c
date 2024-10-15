@@ -10,6 +10,27 @@
 
 #define MAX_STR 50
 #define MAX_THREADS 50
+
+int main(int argc, char **argv) {
+
+    //Process arguments
+    if(argc > 1) {
+        for(int i = 1; i < argc; i++) {
+            printf("hello");
+        }
+    }
+    else {
+        printf("Error! \n To run program: ./A1 fileName flag \n");
+        return 1;
+    }
+
+
+
+
+
+
+    return 0;
+}
 /*
 //Global file pointer
 FILE* writeFile = NULL;
