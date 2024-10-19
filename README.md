@@ -30,8 +30,11 @@ Summary (if chosen to display on terminal)
 
 Lucas Sudol
 lsudol@uoguelph.ca
+1227984
 
 Sebastian Kula
+skula@uoguelph.ca
+1247993
 
 ## Development History
 
