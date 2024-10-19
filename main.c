@@ -6,28 +6,28 @@
 #include <stdlib.h>
 #include <ctype.h> 
 #include <pthread.h>
-
+#include <string.h>
 
 #define MAX_STR 50
 #define MAX_THREADS 50
 
 int main(int argc, char **argv) {
+    FILE * stream = NULL;
 
-    //Process arguments
-    if(argc > 1) {
-        for(int i = 1; i < argc; i++) {
-            printf("hello");
+    // Process arguments
+    if(argc == 2) { // File and no flag
+        printf("")
+    }
+    else if (argc == 3){ // File and flag
+        if (strcmp(strlwr(argv[2]), "true")) {
+            stream = stdout;
         }
     }
+
     else {
-        printf("Error! \n To run program: ./A1 fileName flag \n");
+        printf("Error! \n To run program: ./A1 fileName flag(true/false) \n");
         return 1;
     }
-
-
-
-
-
 
     return 0;
 }
