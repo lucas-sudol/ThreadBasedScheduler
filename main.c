@@ -2,10 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <semaphore.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include <ctype.h>
-#include <pthread.h>
 #include <stdbool.h>
 #include "queue.h"
 
@@ -32,25 +29,26 @@ double calculatePie(long n) {
     for (int i = 0; i < n; i++, factor = -factor) {
         sum += factor / (2 * i + 1);
     }
-    return (double)4.0 * sum;
+    return ((double)4.0 * sum);
 }
 
 // Worker Thread Function
 void* workerFunc(void* arg) {
     long value;
     while(getMessage(((ThreadArgs*)arg)->q, &value)) {
+        //fprintf(stderr, "Thread %d received value %d\n", ((ThreadArgs*)arg)->workerId, value);
         sem_wait(&availableThreads);
         if(printOutput)
-            fprintf(stdout, "Thread %d completed computed Pi using %ld iterations, the result is %f\n",((ThreadArgs*)arg)->workerId, value, calculatePie(value));
+            fprintf(stderr, "Thread %d completed computed Pi using %ld iterations, the result is %.20f\n",((ThreadArgs*)arg)->workerId, value, calculatePie(value));
         else
             calculatePie(value);
 
         sem_post(&availableThreads);
-        pthread_cond_signal(&((ThreadArgs*)arg)->q->endCond);
+        //pthread_cond_signal(&((ThreadArgs*)arg)->q->endCond);
     }
 
-    fprintf(stderr, "Thread %d exiting\n", ((ThreadArgs*)arg)->workerId);
-    return NULL;
+    //fprintf(stderr, "Thread %d exiting\n", ((ThreadArgs*)arg)->workerId);
+    pthread_exit(NULL);
 }
 
 int main(int argc, char** argv) {
@@ -88,65 +86,43 @@ int main(int argc, char** argv) {
         fprintf(stderr, "Error!, Invalid worker threads specified in file!\n");
         return 0;
     }
-    
-
 
     //Spawn threads
     pthread_t* tid = malloc(maxThreads * sizeof(pthread_t));
     ThreadArgs* args = malloc(maxThreads * sizeof(ThreadArgs));
     Queue* q = createQueue();
-    sem_init(&availableThreads, 0, maxThreads);
-    
-    //Parse tasks and add to queue - before spawning threads to match assignment example
-    while (fscanf(fp, "%ld", &tasks) == 1) {
-        sendMessage(q, tasks);
-    }
-    
+    sem_init(&availableThreads, 0, maxThreads);  
 
-    pthread_attr_t attr;
-    pthread_attr_init(&attr);
-    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
     for (int i = 0; i < maxThreads; i++) {
         args[i].workerId = i + 1;
         args[i].q = q;
-        pthread_create(&tid[i], &attr, workerFunc, &args[i]); 
-    }
-    pthread_attr_destroy(&attr);
-
-    //Non busy wait until all threads are finished working on tasks
-    int semaphoreCount = 0;
-    while(semaphoreCount != maxThreads) {
-        sem_getvalue(&availableThreads, &semaphoreCount);
-        //Conditional wait until threads finish, then check if all tasks are complete
-        if(semaphoreCount != maxThreads){
-            pthread_mutex_lock(&q->mutex);
-            pthread_cond_wait(&q->endCond, &q->mutex);
-            pthread_mutex_unlock(&q->mutex);
-        }
+        pthread_create(&tid[i], NULL, workerFunc, &args[i]); 
     }
 
+    //Parse tasks and add to queue - after worker pool is created
+    while (fscanf(fp, "%ld", &tasks) == 1) {
+        sendMessage(q, tasks);
+    }
 
-
+    //Lock mutex before going in to signal any sleeping threads
+    pthread_mutex_lock(&q->mutex);
+    //Signal all worker threads when finished to exit
     q->exitThread = 1;
-    for(int i = 0; i < maxThreads; i++) 
+    for(int i = 0; i < maxThreads; i++) //Signal any already sleeping threads on empty queue to wakeup
         pthread_cond_signal(&q->cond);
+    pthread_mutex_unlock(&q->mutex);
+
+
+    for(int i =0; i< maxThreads; i++)
+        pthread_join(tid[i], NULL);
+
 
     //Clean up
-
     sem_destroy(&availableThreads);
     fclose(fp);
     free(tid);
     free(args);
     free(q);
 
-    
-
-    /*
-    // Initialize counting semaphore for available worker threads
-    sem_init(&availableThreads, 0, maxThreads);
-
-    // Wait until semaphore is == maxThreads, then signal termination
-    terminateThreads = true;
-    */
     return 0;
 }

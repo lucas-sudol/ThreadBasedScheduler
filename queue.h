@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <pthread.h>
+
 typedef struct node {
     long value;
     struct node* next;

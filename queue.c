@@ -1,9 +1,4 @@
 // Adapted from msgqueueCondition.c by Professor Denis Nikitenko
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <pthread.h>
 #include "queue.h"
 
 //Create a queue and initilize its mutex and condition variable
@@ -55,14 +50,14 @@ int getMessage(Queue* q, long* outputValue)
     //If we get woken up but the queue is still null, we go back to sleep
     while(q->head == NULL){
         //fprintf(stderr,"THREAD WAITING FOR MESSAGE\n");
-        pthread_cond_wait(&q->cond, &q->mutex);
 
         //Check terminate threads condition, return 0 if we need to terminate
         if(q->exitThread) {
-
             pthread_mutex_unlock(&q->mutex);
             return 0;
         }
+
+        pthread_cond_wait(&q->cond, &q->mutex);
 
         //fprintf(stderr,"THREAD GOT THE MESSAGE\n");
     }
