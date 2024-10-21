@@ -8,8 +8,8 @@
 
 // Global Variables
 sem_t availableThreads;
-bool printOutput = false;
-bool terminateThreads = false;
+bool printOutput;
+bool terminateThreads;
 
 typedef struct {
     int workerId;
@@ -44,7 +44,6 @@ void* workerFunc(void* arg) {
             calculatePie(value);
 
         sem_post(&availableThreads);
-        //pthread_cond_signal(&((ThreadArgs*)arg)->q->endCond);
     }
 
     //fprintf(stderr, "Thread %d exiting\n", ((ThreadArgs*)arg)->workerId);
@@ -52,14 +51,18 @@ void* workerFunc(void* arg) {
 }
 
 int main(int argc, char** argv) {
+    //local main variables
     FILE* fp = NULL;
     int maxThreads = 0;
     long int tasks = 0;
 
+    //Initialize global variables
+    printOutput = false;
+    terminateThreads = false;
+
     //Process arguments
-    if (argc > 1) { // File is present
+    if (argc > 1 && argc < 4) { // File is present
         fp = fopen(argv[1], "r");
-        
         if (!fp) {
             printf("Could not open file!! \n");
             usage();
@@ -72,19 +75,17 @@ int main(int argc, char** argv) {
 
     if (argc == 3) { // File and flag
         // Convert flag to lowercase
-        for (int i = 0; i < strlen(argv[2]); i++) {
-            argv[2][i] = tolower(argv[2][i]);
-        }
+        for (int i = 0; i < strlen(argv[2]); i++) 
+            argv[2][i] = tolower(argv[2][i]);  
         
-        if (!strcmp(argv[2], "true")) { // If flag is true, print results
+        if (!strcmp(argv[2], "true")) // If flag is true, print results
             printOutput = true;
-        }
     }
 
     // Parse the file for number of worker threads and messages
     if (!(fscanf(fp, "%d", &maxThreads)== 1) || maxThreads < 1){
         fprintf(stderr, "Error!, Invalid worker threads specified in file!\n");
-        return 0;
+        return 1;
     }
 
     //Spawn threads
@@ -110,12 +111,12 @@ int main(int argc, char** argv) {
     q->exitThread = 1;
     for(int i = 0; i < maxThreads; i++) //Signal any already sleeping threads on empty queue to wakeup
         pthread_cond_signal(&q->cond);
+
     pthread_mutex_unlock(&q->mutex);
 
-
+    //Join all threads to ensure completion - avoids busy wait
     for(int i =0; i< maxThreads; i++)
         pthread_join(tid[i], NULL);
-
 
     //Clean up
     sem_destroy(&availableThreads);
@@ -123,6 +124,5 @@ int main(int argc, char** argv) {
     free(tid);
     free(args);
     free(q);
-
     return 0;
 }

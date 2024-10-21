@@ -35,7 +35,6 @@ void sendMessage(Queue* q, long value)
     //Signal the consumer thread waiting on this condition variable
     pthread_cond_signal(&q->cond);
     pthread_mutex_unlock(&q->mutex);
-    //fprintf(stderr, "MESSAGE SENT FROM MAIN\n");
 }
 
 //"Receive" a message - remove it from the queue
@@ -49,17 +48,12 @@ int getMessage(Queue* q, long* outputValue)
     //Wait for a signal telling us that there's something on the queue
     //If we get woken up but the queue is still null, we go back to sleep
     while(q->head == NULL){
-        //fprintf(stderr,"THREAD WAITING FOR MESSAGE\n");
-
         //Check terminate threads condition, return 0 if we need to terminate
         if(q->exitThread) {
             pthread_mutex_unlock(&q->mutex);
             return 0;
         }
-
         pthread_cond_wait(&q->cond, &q->mutex);
-
-        //fprintf(stderr,"THREAD GOT THE MESSAGE\n");
     }
     
     //By the time we get here, we know q->head is not null, so it's all good
@@ -74,6 +68,5 @@ int getMessage(Queue* q, long* outputValue)
     
     //Release lock
     pthread_mutex_unlock(&q->mutex);
-
     return success;
 }
