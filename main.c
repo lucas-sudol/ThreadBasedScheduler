@@ -6,7 +6,7 @@
 #include <stdbool.h>
 #include "queue.h"
 
-// Global Variables
+// Global Variables and thread argument struct definition
 sem_t availableThreads;
 bool printOutput;
 bool terminateThreads;
@@ -35,13 +35,22 @@ double calculatePie(long n) {
 // Worker Thread Function
 void* workerFunc(void* arg) {
     long value;
+    double pi;
+    
     while(getMessage(((ThreadArgs*)arg)->q, &value)) {
         //fprintf(stderr, "Thread %d received value %d\n", ((ThreadArgs*)arg)->workerId, value);
         sem_wait(&availableThreads);
-        if(printOutput)
-            fprintf(stderr, "Thread %d completed computed Pi using %ld iterations, the result is %.20f\n",((ThreadArgs*)arg)->workerId, value, calculatePie(value));
-        else
+
+        if(printOutput){
+            pi = calculatePie(value);
+
+            pthread_mutex_lock(&((ThreadArgs*)arg)->q->printMutex);
+            fprintf(stdout,"Thread %d completed computed Pi using %ld iterations, the result is %.20f\n",((ThreadArgs*)arg)->workerId, value, pi);
+            pthread_mutex_unlock(&((ThreadArgs*)arg)->q->printMutex);
+        }
+        else{
             calculatePie(value);
+        }
 
         sem_post(&availableThreads);
     }
@@ -120,9 +129,9 @@ int main(int argc, char** argv) {
 
     //Clean up
     sem_destroy(&availableThreads);
+    freeQueue(q);
     fclose(fp);
     free(tid);
     free(args);
-    free(q);
     return 0;
 }

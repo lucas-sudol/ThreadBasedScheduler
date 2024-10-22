@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
         sum += factor/(2*i+1);
     }
     pi = 4.0*sum;
-    printf("Pi is %.20f\n", pi);
+    printf("The serial calculation of Pi is %.20f\n", pi);
 
     return 0;
 }

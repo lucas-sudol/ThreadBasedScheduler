@@ -1,0 +1,37 @@
+SAVED REPORT FROM STDOUT
+
+Test Case 1 with 1 thread(s):
+  iterations:   10              Parallel Pi = 3.0418396189      Serial Pi = 3.0418396189        PASS
+  iterations:   100             Parallel Pi = 3.1315929036      Serial Pi = 3.1315929036        PASS
+  iterations:   1000            Parallel Pi = 3.1405926538      Serial Pi = 3.1405926538        PASS
+  iterations:   10000           Parallel Pi = 3.1414926536      Serial Pi = 3.1414926536        PASS
+  iterations:   100000          Parallel Pi = 3.1415826536      Serial Pi = 3.1415826536        PASS
+  iterations:   1000000         Parallel Pi = 3.1415916536      Serial Pi = 3.1415916536        PASS
+  iterations:   10000000        Parallel Pi = 3.1415925536      Serial Pi = 3.1415925536        PASS
+  iterations:   100000000       Parallel Pi = 3.1415926436      Serial Pi = 3.1415926436        PASS
+Test Case 2 with 8 thread(s):
+  iterations:   10              Parallel Pi = 3.0418396189      Serial Pi = 3.0418396189        PASS
+  iterations:   100             Parallel Pi = 3.1315929036      Serial Pi = 3.1315929036        PASS
+  iterations:   1000            Parallel Pi = 3.1405926538      Serial Pi = 3.1405926538        PASS
+  iterations:   10000           Parallel Pi = 3.1414926536      Serial Pi = 3.1414926536        PASS
+  iterations:   100000          Parallel Pi = 3.1415826536      Serial Pi = 3.1415826536        PASS
+  iterations:   1000000         Parallel Pi = 3.1415916536      Serial Pi = 3.1415916536        PASS
+  iterations:   10000000        Parallel Pi = 3.1415925536      Serial Pi = 3.1415925536        PASS
+  iterations:   100000000       Parallel Pi = 3.1415926436      Serial Pi = 3.1415926436        PASS
+Test Case 3 with 4 thread(s):
+  iterations:   10              Parallel Pi = 3.0418396189      Serial Pi = 3.0418396189        PASS
+  iterations:   100             Parallel Pi = 3.1315929036      Serial Pi = 3.1315929036        PASS
+  iterations:   1000            Parallel Pi = 3.1405926538      Serial Pi = 3.1405926538        PASS
+  iterations:   10000           Parallel Pi = 3.1414926536      Serial Pi = 3.1414926536        PASS
+  iterations:   100000          Parallel Pi = 3.1415826536      Serial Pi = 3.1415826536        PASS
+  iterations:   1000000         Parallel Pi = 3.1415916536      Serial Pi = 3.1415916536        PASS
+  iterations:   10000000        Parallel Pi = 3.1415925536      Serial Pi = 3.1415925536        PASS
+  iterations:   100000000       Parallel Pi = 3.1415926436      Serial Pi = 3.1415926436        PASS
+  iterations:   10              Parallel Pi = 3.0418396189      Serial Pi = 3.0418396189        PASS
+  iterations:   100             Parallel Pi = 3.1315929036      Serial Pi = 3.1315929036        PASS
+  iterations:   1000            Parallel Pi = 3.1405926538      Serial Pi = 3.1405926538        PASS
+  iterations:   10000           Parallel Pi = 3.1414926536      Serial Pi = 3.1414926536        PASS
+  iterations:   100000          Parallel Pi = 3.1415826536      Serial Pi = 3.1415826536        PASS
+  iterations:   1000000         Parallel Pi = 3.1415916536      Serial Pi = 3.1415916536        PASS
+  iterations:   10000000        Parallel Pi = 3.1415925536      Serial Pi = 3.1415925536        PASS
+  iterations:   100000000       Parallel Pi = 3.1415926436      Serial Pi = 3.1415926436        PASS

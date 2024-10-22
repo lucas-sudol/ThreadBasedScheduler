@@ -1,0 +1,8 @@
+To run correctness report python script, run in MAIN DIRECTORY, ensuring c code is compiled first with make all.
+Prints results to STD OUT
+
+Each case should be ran seperately, and results are printed in a test_results.csv file
+(they take a long time, so running them all at once will take well over an hours)
+
+Results from the test cases are located in this directory, alongside their corresponding graphs.
+

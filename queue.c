@@ -8,12 +8,21 @@ Queue* createQueue()
     q->head = NULL;
     q->tail = NULL;
     pthread_mutex_init(&q->mutex, NULL);
+    pthread_mutex_init(&q->printMutex, NULL);
     
     //Initialize the condition variable
     pthread_cond_init(&q->cond, NULL);
     pthread_cond_init(&q->endCond, NULL);
     q->exitThread = 0;
     return q;
+}
+
+//Destroy queue and mutexes and free all memory
+void freeQueue(Queue* q)
+{
+    pthread_mutex_destroy(&q->mutex);
+    pthread_mutex_destroy(&q->printMutex);
+    free(q);
 }
 
 //"Send" a message - append it onto the queue

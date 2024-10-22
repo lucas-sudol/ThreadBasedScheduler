@@ -1,0 +1,9 @@
+To run correctness report python script, run in MAIN DIRECTORY, ensuring c code is compiled first with make all.
+Prints results to STD OUT
+
+For valgrind race condition/memory leak Test
+Ensure valgrindTestCase.txt is in MAIN DIRECTORY, and c code is compiles use make all
+
+run valgrind --fair-sched=yes ./A1 valgrindTestCase.txt true
+valgrind --tool=drd --fair-sched=yes ./A1 valgrindTestCase.txt true
+Prints results of test case to STDOUT

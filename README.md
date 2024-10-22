@@ -3,38 +3,33 @@
 A1 - Pthreads Based Scehduler
 
 ## Description
-Uses linux Pthreads to to perform thread based scheudling of computing Pi.
+Uses linux Pthreads to to perform thread based scheudling of PI computations.
 
 ## Getting Started
 
 ### Dependencies
 
-Linux Docker Containter
+Linux 3090 Docker Containter
 
 ### Executing program
 
 * How to build and run the program
-make
+make all
 
-./A1 fileName flag
+./A1 fileName flag (true/false print output)
 
 * include the expected output
 
-lsudol_A2.out
+A1
+serial
 
-Summary (if chosen to display on terminal)
 
 ## Limitations
 
 ## Author Information
-
 Lucas Sudol
-lsudol@uoguelph.ca
-1227984
-
 Sebastian Kula
-skula@uoguelph.ca
-1247993
+
 
 ## Development History
 
