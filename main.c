@@ -18,7 +18,7 @@ typedef struct {
 
 // Error executing program
 void usage() {
-    printf("Error!! To run program: ./A1 fileName flag(true/false) \n");
+    printf("Error!! To run program: ./pthreads fileName (for computations) flag(true/false) \n");
 }
 
 // Calculate Pie Function

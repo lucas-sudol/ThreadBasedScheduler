@@ -15,12 +15,27 @@ POSIX compatible operating system
 * How to build and run the program
 make all
 
-./A1 fileName flag (true/false print output)
+./pthreads fileName flag (true/false print output)
+./serial n(calculation of pi) - for single threaded calculations of pi
+
+filename - name of a text file to provide instuctural inputs
+
+File Template
+    thread count - eg 4
+    number of interactions to calculate pi to - 100000 
+    number of interactions to calculate pi to - 100000 
+    number of interactions to calculate pi to - 100000 
+    number of interactions to calculate pi to - 100000  
+                                                        - each new line is a scheduled task to be added to the queue
+                                                          tasks are not broken up further
 
 * include the expected output
 
-A1
+pthreads
 serial
+
+
+
 
 
 ## Author Information
