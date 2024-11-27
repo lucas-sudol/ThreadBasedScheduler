@@ -3,12 +3,13 @@
 A1 - Pthreads Based Scehduler
 
 ## Description
-Uses linux Pthreads to to perform thread based scheudling of PI computations.
+Uses linux Pthreads to to perform thread based scheudling of PI computations. Using a text file, select the number of threads for the program to run in, and then
+schedule a pool of tasks to be complteded by the thread pool. These tasks will be the set iterations to calculate Pi too.
 
 ## Getting Started
 
 ### Dependencies
-POSIX compatible operating system
+POSIX pthreads compatible operating system
 
 ### Executing program
 
@@ -32,10 +33,25 @@ File Template
 * include the expected output
 
 pthreads
-serial
+./pthreads pi.txt true
+Thread 1 completed computed Pi using 100000 iterations, the result is 3.14158265358971977577
+Thread 2 completed computed Pi using 100000 iterations, the result is 3.14158265358971977577
+Thread 3 completed computed Pi using 100000 iterations, the result is 3.14158265358971977577
+Thread 4 completed computed Pi using 100000 iterations, the result is 3.14158265358971977577
+Thread 1 completed computed Pi using 100000 iterations, the result is 3.14158265358971977577
+Thread 3 completed computed Pi using 100000 iterations, the result is 3.14158265358971977577
+Thread 2 completed computed Pi using 100000 iterations, the result is 3.14158265358971977577
+Thread 4 completed computed Pi using 100000 iterations, the result is 3.14158265358971977577
+Thread 3 completed computed Pi using 100000 iterations, the result is 3.14158265358971977577
+Thread 1 completed computed Pi using 100000 iterations, the result is 3.14158265358971977577
+
+./serial 100000
+The serial calculation of Pi is 3.14158265358971977577
 
 
-
+## Performance Analysis
+Performance_Analysis_Report contains summary of program correctness and performance. There are a variety of test cases, exploring the different ways
+thread based programming can be used to enhance program performance.
 
 
 ## Author Information
