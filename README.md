@@ -8,8 +8,7 @@ Uses linux Pthreads to to perform thread based scheudling of PI computations.
 ## Getting Started
 
 ### Dependencies
-
-Linux 3090 Docker Containter
+POSIX compatible operating system
 
 ### Executing program
 
@@ -24,15 +23,9 @@ A1
 serial
 
 
-## Limitations
-
 ## Author Information
 Lucas Sudol
 Sebastian Kula
 
-
-## Development History
-
-## Acknowledgments
 
 
