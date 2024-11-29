@@ -6,7 +6,7 @@ def run_parallel(test_file, print_output):
     """
     Runs the parallel A1 program and returns the computed pi value from stdout.
     """
-    result = subprocess.run(['./A1', test_file, str(print_output)], capture_output=True, text=True)
+    result = subprocess.run(['./pthreads', test_file, str(print_output)], capture_output=True, text=True)
     
     # Use regex to extract the Pi value from stdout
     match = re.search(r"the result is ([0-9]+\.[0-9]+)", result.stdout)

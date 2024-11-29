@@ -24,8 +24,8 @@ def run_test(test_file, print_output, repetitions=30):
     timings = []
     for _ in range(repetitions):
         start_time = time.time()
-        # Run the A1 program (replace './A1' with the actual command to run it if needed)
-        subprocess.run(['./A1', test_file, str(print_output)], check=True)
+        # Run the A1 program (replace './pthreads' with the actual command to run it if needed)
+        subprocess.run(['./pthreads', test_file, str(print_output)], check=True)
         end_time = time.time()
         timings.append(end_time - start_time)
     
